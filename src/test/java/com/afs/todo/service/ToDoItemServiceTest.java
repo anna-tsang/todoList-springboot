@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
 public class ToDoItemServiceTest {
@@ -66,6 +67,17 @@ public class ToDoItemServiceTest {
         //then
         ToDoItem actual =toDoItemService.create(todoItem);
         assertEquals(todoItem, actual);
+    }
+
+    @Test
+    void should_return_todoitem_when_delete_todoitem_given_todoitem() {
+        ToDoItem todoItem = new ToDoItem( "1","do homework", false);
+        //when
+        given(toDoItemRepository.findById(todoItem.getId()))
+                .willReturn(java.util.Optional.of(todoItem));
+        //then
+        toDoItemService.delete(todoItem.getId());
+        verify(toDoItemRepository).delete(todoItem);
     }
 
 }
