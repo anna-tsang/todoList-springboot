@@ -27,8 +27,15 @@ public class ToDoListService {
         return toDoListRepository.insert(todoItem);
     }
 
-    public ToDoItem updateToDoDone(String id, Boolean done){
-        return toDoListRepository.save(toDoList);
+    public ToDoItem updateToDoDone(String id, ToDoItem updatedToDoItem){
+        ToDoItem toDoItem = findToDoItemById(id);
+        if(updatedToDoItem.getDone() != null){
+            toDoItem.setDone(updatedToDoItem.getDone());
+        }
+        if(updatedToDoItem.getText() != null){
+            toDoItem.setText(updatedToDoItem.getText());
+        }
+        return toDoListRepository.save(toDoItem);
     }
 
     public List<ToDoItem> findToDoListByDone(Boolean done) {
@@ -39,4 +46,7 @@ public class ToDoListService {
         toDoListRepository.delete(findToDoItemById(id));
     }
 
+    public void deleteAll() {
+        toDoListRepository.deleteAll();
+    }
 }

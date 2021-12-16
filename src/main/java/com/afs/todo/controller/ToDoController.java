@@ -43,14 +43,20 @@ public class ToDoController {
     }
 
     @PutMapping("/{id}")
-    public ToDoItem updateToDoItemDone(@PathVariable String id, Boolean done){
-        return toDoListService.updateToDoDone(id, done);
+    public ToDoItem updateToDoItemDone(@PathVariable String id, @RequestBody ToDoItem todoItem){
+        return toDoListService.updateToDoDone(id, todoItem);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void deleteToDoItem(@PathVariable String id){
         toDoListService.delete(id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping
+    public void deleteAll(){
+        toDoListService.deleteAll();
     }
 
 }
