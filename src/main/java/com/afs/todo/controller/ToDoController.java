@@ -1,6 +1,6 @@
 package com.afs.todo.controller;
 
-import com.afs.todo.entity.ToDoList;
+import com.afs.todo.entity.ToDoItem;
 import com.afs.todo.service.ToDoListService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,32 +20,37 @@ import java.util.List;
 @RequestMapping("ToDoList")
 public class ToDoController {
 
-    private ToDoListService todoListService;
+    private ToDoListService toDoListService;
 
-    public ToDoController(ToDoListService todoListService){
-        this.todoListService = todoListService;
+    public ToDoController(ToDoListService toDoListService){
+        this.toDoListService = toDoListService;
     }
 
     @GetMapping
-    public List<ToDoList> getToDoList() {
-        return todoListService.findAllToDoList();
+    public List<ToDoItem> getToDoList() {
+        return toDoListService.findAllToDoList();
     }
 
     @GetMapping(params = {"done"})
-    public List<ToDoList> getToDoListByDone(@RequestParam Boolean done){
-        return todoListService.findToDoListByDone(done);
+    public List<ToDoItem> getToDoListByDone(@RequestParam Boolean done){
+        return toDoListService.findToDoListByDone(done);
     }
 
-//    @PostMapping
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public ToDoList createToDoList(@RequestBody ToDoList todoList){
-//        return todoListService.create(todoList);
-//    }
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ToDoItem createToDoItem(@RequestBody ToDoItem todoItem){
+        return toDoListService.create(todoItem);
+    }
+
+    @PutMapping("/{id}")
+    public ToDoItem updateToDoItemDone(@PathVariable String id, Boolean done){
+        return toDoListService.updateToDoDone(id, done);
+    }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void deleteToDoList(@PathVariable String id){
-        todoListService.delete(id);
+    public void deleteToDoItem(@PathVariable String id){
+        toDoListService.delete(id);
     }
 
 }

@@ -1,12 +1,12 @@
 package com.afs.todo.repository;
 
-import com.afs.todo.entity.ToDoList;
+import com.afs.todo.entity.ToDoItem;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface ToDoListRepository extends MongoRepository<ToDoList, String> {
-    List<ToDoList> findAllByDone(Boolean done);
+public interface ToDoListRepository extends MongoRepository<ToDoItem, String> {
+    List<ToDoItem> findAllByDone(Boolean done);
 }

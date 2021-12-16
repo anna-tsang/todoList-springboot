@@ -1,6 +1,6 @@
 package com.afs.todo.service;
 
-import com.afs.todo.entity.ToDoList;
+import com.afs.todo.entity.ToDoItem;
 import com.afs.todo.exception.NoMatchIdFoundException;
 import com.afs.todo.repository.ToDoListRepository;
 import org.springframework.stereotype.Service;
@@ -15,23 +15,28 @@ public class ToDoListService {
         this.toDoListRepository = toDoListRepository;
     }
 
-    public List<ToDoList> findAllToDoList(){
+    public List<ToDoItem> findAllToDoList(){
         return toDoListRepository.findAll();
     }
 
-    public ToDoList findToDoListById(String id){
+    public ToDoItem findToDoItemById(String id){
         return toDoListRepository.findById(id).orElseThrow(NoMatchIdFoundException::new);
     }
 
-    public ToDoList create(ToDoList todoList) {
-        return toDoListRepository.insert(todoList);
+    public ToDoItem create(ToDoItem todoItem) {
+        return toDoListRepository.insert(todoItem);
     }
 
-    public List<ToDoList> findToDoListByDone(Boolean done) {
+    public ToDoItem updateToDoDone(String id, Boolean done){
+        return toDoListRepository.save(toDoList);
+    }
+
+    public List<ToDoItem> findToDoListByDone(Boolean done) {
         return toDoListRepository.findAllByDone(done);
     }
 
     public void delete(String id) {
-        toDoListRepository.delete(findToDoListById(id));
+        toDoListRepository.delete(findToDoItemById(id));
     }
+
 }
