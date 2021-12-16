@@ -16,6 +16,7 @@ public class ToDoItem {
         this.text = text;
         this.done = done;
     }
+
     public ToDoItem(String text, Boolean done) {
         this.text = text;
         this.done = done;
@@ -23,6 +24,12 @@ public class ToDoItem {
 
     public ToDoItem(String text) {
         this.text = text;
+        this.done = false;
+    }
+
+    public ToDoItem(String id, String text) {
+        this.text = text;
+        this.id = id;
         this.done = false;
     }
 
