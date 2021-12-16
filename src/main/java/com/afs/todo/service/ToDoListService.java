@@ -23,6 +23,6 @@ public class ToDoListService {
     }
 
     public List<ToDoList> findToDoListByDone(Boolean done) {
-        return toDoListRepository.findByDone(done);
+        return toDoListRepository.findAllByDone(done);
     }
 }

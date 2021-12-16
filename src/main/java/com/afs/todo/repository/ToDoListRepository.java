@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ToDoListRepository extends MongoRepository<ToDoList, String> {
-    List<ToDoList> findByDone(Boolean done);
+    List<ToDoList> findAllByDone(Boolean done);
 }
