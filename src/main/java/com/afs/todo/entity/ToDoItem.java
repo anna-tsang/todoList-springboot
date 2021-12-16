@@ -11,6 +11,11 @@ public class ToDoItem {
     private String text;
     private Boolean done;
 
+    public ToDoItem(String id, String text, Boolean done) {
+        this.id = id;
+        this.text = text;
+        this.done = done;
+    }
     public ToDoItem(String text, Boolean done) {
         this.text = text;
         this.done = done;

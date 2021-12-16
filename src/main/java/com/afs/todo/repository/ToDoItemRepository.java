@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ToDoListRepository extends MongoRepository<ToDoItem, String> {
+public interface ToDoItemRepository extends MongoRepository<ToDoItem, String> {
     List<ToDoItem> findAllByDone(Boolean done);
 }
