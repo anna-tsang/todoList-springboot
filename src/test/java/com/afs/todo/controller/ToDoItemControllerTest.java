@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -43,5 +44,23 @@ public class ToDoItemControllerTest {
                 .andExpect((jsonPath("$[0].text").value("Do CSS")))
                 .andExpect((jsonPath("$[0].done").value(false)));
     }
+
+    @Test
+    void should_return_new_todolist_when_perform_post_given_new_todoitem() throws Exception {
+        //given
+        String newCompany = "{\n" +
+                "        \"id\": \"61bb072f9d895d624693914b\",\n" +
+                "        \"text\": \"Do CSS ar\",\n" +
+                "        \"done\": true\n" +
+                "    }";
+        //when
+        //then
+        mockMvc.perform((MockMvcRequestBuilders.post(TODOLIST_ENDPOINT)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(newCompany)))
+                .andExpect(status().isCreated())
+                .andExpect((jsonPath("$.text").value("Do CSS ar")));
+    }
+
 
 }
