@@ -62,5 +62,22 @@ public class ToDoItemControllerTest {
                 .andExpect((jsonPath("$.text").value("Do CSS ar")));
     }
 
+    @Test
+    void should_update_todoitem_when_perform_put_given_todolist_id_and_updated_todoitem() throws Exception {
+        //given
+        ToDoItem toDoItem = new ToDoItem("Do CSS");
+        toDoItemRepository.insert(toDoItem);
+        String updatedToDoItem = "{\n" +
+                "    \"id\": 1,\n" +
+                "    \"text\": \"DO HW\"\n" +
+                "}";
+
+        //when
+        mockMvc.perform(MockMvcRequestBuilders.put(TODOLIST_ENDPOINT + "/{id}", toDoItem.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(updatedToDoItem))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.text").value("DO HW"));
+    }
 
 }
