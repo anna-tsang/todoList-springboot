@@ -39,7 +39,7 @@ public class ToDoItemServiceTest {
     }
 
     @Test
-    void should_return_updated_todolist_when_do_update_given_updated_todolist() {
+    void should_return_updated_todoitem_when_do_update_given_updated_todoitem() {
         //given
         ToDoItem toDoItem = new ToDoItem("1", "Do Homework", false);
         ToDoItem updatedToDoItem = new ToDoItem("1", "Do CSS", true);
@@ -55,6 +55,17 @@ public class ToDoItemServiceTest {
         System.out.println(updatedToDoItem.getText());
         ToDoItem actual = toDoItemService.updateToDoItem(toDoItem.getId(), updatedToDoItem);
         assertEquals(updatedToDoItem, actual);
+    }
+
+    @Test
+    void should_return_todoitem_when_create_todoitem_given_todoitem() {
+        //given
+        ToDoItem todoItem = new ToDoItem( "do homework");
+        //when
+        given(toDoItemRepository.insert(todoItem)).willReturn(todoItem);
+        //then
+        ToDoItem actual =toDoItemService.create(todoItem);
+        assertEquals(todoItem, actual);
     }
 
 }
