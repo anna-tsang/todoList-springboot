@@ -1,14 +1,27 @@
 package com.afs.todo.entity;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
+@Document
 public class ToDoList {
+    @MongoId(FieldType.OBJECT_ID)
     private String id;
     private String text;
     private Boolean done;
 
-    public ToDoList(String id, String text, Boolean done) {
-        this.id = id;
+    public ToDoList(String text, Boolean done) {
         this.text = text;
         this.done = done;
+    }
+
+    public ToDoList(String text) {
+        this.text = text;
+        this.done = false;
+    }
+
+    public ToDoList(){
     }
 
     public String getId() {

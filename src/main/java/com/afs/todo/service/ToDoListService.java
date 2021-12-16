@@ -17,4 +17,12 @@ public class ToDoListService {
     public List<ToDoList> findAllToDoList(){
         return toDoListRepository.findAll();
     }
+
+    public ToDoList create(ToDoList todoList) {
+        return toDoListRepository.insert(todoList);
+    }
+
+    public List<ToDoList> findToDoListByDone(Boolean done) {
+        return toDoListRepository.findByDone(done);
+    }
 }
