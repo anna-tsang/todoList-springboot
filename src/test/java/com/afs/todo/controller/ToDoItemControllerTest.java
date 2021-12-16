@@ -83,11 +83,11 @@ public class ToDoItemControllerTest {
     @Test
     void should_delete_todoitem_when_perform_delete_given_todoitem_id() throws Exception {
         //given
-        ToDoItem company = new ToDoItem( "Do CSS");
-        toDoItemRepository.insert(company);
+        ToDoItem toDoItem = new ToDoItem( "Do CSS");
+        toDoItemRepository.insert(toDoItem);
         //when
         //then
-        mockMvc.perform(MockMvcRequestBuilders.delete(TODOLIST_ENDPOINT+"/{id}", company.getId()))
+        mockMvc.perform(MockMvcRequestBuilders.delete(TODOLIST_ENDPOINT+"/{id}", toDoItem.getId()))
                 .andExpect(status().isNoContent());
     }
 
